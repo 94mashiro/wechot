@@ -11,7 +11,8 @@
     "lib"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.com"
+    "registry": "https://registry.npmjs.com",
+    "access": "public"
   },
   "scripts": {
     "prepublishOnly": "npm run build",

@@ -1,0 +1,7 @@
+lib
+node_modules
+lerna-debug.log
+wechot.memory-card.json
+wechot.config.js
+.idea
+.vscode

@@ -1,0 +1,27 @@
+{
+  "name": "@wechot/repo",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/**"
+    ]
+  },
+  "scripts": {
+    "build": "yarn workspace @wechot/utils build && yarn workspace @wechot/core build && yarn workspace @wechot/cli build && yarn workspace @wechot/plugin-forward-telegram build && yarn workspace @wechot/plugin-ping build"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-config-alloy": "^3.10.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.4"
+  }
+}

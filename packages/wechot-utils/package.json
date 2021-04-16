@@ -1,0 +1,24 @@
+{
+  "name": "@wechot/utils",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "MashiroWang <hyperoot@gmail.com>",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "rimraf lib",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
+}

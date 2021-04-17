@@ -37,7 +37,8 @@ export class Session {
         const replyMessage: string = await this.context.command.parse(commandArgs);
         const isMultipleLine = replyMessage.match('\n');
         if (replyMessage) {
-          const payloadMessage = `@${senderName}${isMultipleLine ? '\n' : ' '}${replyMessage}`;
+          const mentionHideChar = ' ';
+          const payloadMessage = `@${senderName}${mentionHideChar}${isMultipleLine ? '\n' : ' '}${replyMessage}`;
           await message.say(payloadMessage);
         }
       }

@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#!/usr/bin/env node
 
 import { App } from '@wechot/core';
 import cac from 'cac';

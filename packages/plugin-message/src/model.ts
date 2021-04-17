@@ -8,6 +8,7 @@ export class MessageHistoryModel {
       groupTopic: String,
       senderName: String,
       content: String,
+      messageType: { type: Number, default: 7 },
       createAt: { type: Date, default: Date.now },
     });
     this.model = database.model('messages', schema);

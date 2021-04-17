@@ -27,13 +27,15 @@ const WechotPluginMessagePlugin: IPlugin = {
         return;
       }
       const sendAt = message.date();
-      const content = message.type() === MessageType.Text ? message.text() : '';
+      const messageType = message.type();
+      const content = messageType === MessageType.Text ? message.text() : '';
       // eslint-disable-next-line new-cap
       const modelInstance: Document = new MessageHistory.model({
         groupTopic: roomTopic,
         senderName: senderName,
         content: content,
         createAt: sendAt,
+        messageType: messageType,
       });
       await modelInstance.save();
     };

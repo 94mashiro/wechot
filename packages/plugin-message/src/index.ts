@@ -22,11 +22,11 @@ const WechotPluginMessagePlugin: IPlugin = {
         return;
       }
       const roomTopic = await targetRoom.topic();
-      if (!recordRoomTopics.includes(roomTopic)) {
+      const senderName = message.talker().name();
+      if (!recordRoomTopics.includes(roomTopic) || senderName === 'bot' || senderName === roomTopic) {
         return;
       }
       const sendAt = message.date();
-      const senderName = message.talker().name();
       const content = message.type() === MessageType.Text ? message.text() : '';
       // eslint-disable-next-line new-cap
       const modelInstance: Document = new MessageHistory.model({

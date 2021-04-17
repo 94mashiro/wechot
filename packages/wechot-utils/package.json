@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "keywords": [],
-  "author": "MashiroWang <hyperoot@gmail.com>",
+  "author": "mashirow <hyperoot@gmail.com>",
   "license": "ISC",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

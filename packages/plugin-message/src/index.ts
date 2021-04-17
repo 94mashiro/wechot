@@ -40,6 +40,35 @@ const WechotPluginMessagePlugin: IPlugin = {
       await modelInstance.save();
     };
     events.on('message', handleReceiveMessage);
+    ctx.command.register('top', '发言排行榜')?.action(async () => {
+      const startAt = new Date();
+      startAt.setHours(0, 0, 0, 0);
+      const endAt = new Date();
+      endAt.setHours(24, 0, 0, 0);
+      const results = await MessageHistory.model
+        .find({
+          createAt: {
+            $gte: startAt,
+            $lte: endAt,
+          },
+        })
+        .exec();
+      let outputTupleSet: [string, number][] = [];
+      results.forEach((item) => {
+        const targetTuple = outputTupleSet.find((tuple) => tuple[0] === item.senderName);
+        if (!targetTuple) {
+          outputTupleSet.push([item.senderName, 1]);
+        } else {
+          targetTuple[1] += 1;
+        }
+      });
+      outputTupleSet = outputTupleSet.sort((a, b) => b[1] - a[1]);
+      let outputMessage = '发言排行榜：\n';
+      outputTupleSet.forEach((tuple) => {
+        outputMessage += `${tuple[0]}：${tuple[1]}\n`;
+      });
+      return outputMessage;
+    });
   },
 };
 

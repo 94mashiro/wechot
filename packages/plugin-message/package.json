@@ -1,0 +1,29 @@
+{
+  "name": "@wechot/plugin-message",
+  "version": "0.0.2",
+  "description": "Now I’m the model of a modern major general / The venerated Virginian veteran whose men are all / Lining up, to put me up on a pedestal / Writin’ letters to relatives / Embellishin’ my elegance and eloquence / But the elephant is in the room / The truth is in ya face when ya hear the British cannons go / BOOM",
+  "keywords": [],
+  "author": "mashirow <hyperoot@gmail.com>",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "rimraf lib",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@wechot/core": "^0.0.2"
+  },
+  "devDependencies": {
+    "mongoose": "^5.12.4",
+    "wechaty-puppet": "^0.34.3"
+  }
+}

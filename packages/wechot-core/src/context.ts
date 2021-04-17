@@ -2,6 +2,7 @@ import { App } from './app';
 
 export class Context {
   private app: App;
+  private _database: unknown;
 
   constructor(app: App) {
     this.app = app;
@@ -17,5 +18,17 @@ export class Context {
 
   get session() {
     return this.app.session;
+  }
+
+  get database() {
+    if (!this._database) {
+      console.warn('database is not set already.');
+      return {};
+    }
+    return this._database;
+  }
+
+  set database(instance: any) {
+    this._database = instance;
   }
 }

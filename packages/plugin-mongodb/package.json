@@ -1,0 +1,26 @@
+{
+  "name": "@wechot/plugin-mongodb",
+  "version": "0.0.2",
+  "description": "",
+  "keywords": [],
+  "author": "mashirow <hyperoot@gmail.com>",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "rimraf lib",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@wechot/core": "^0.0.2",
+    "mongoose": "^5.12.4"
+  }
+}

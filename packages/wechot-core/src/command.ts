@@ -1,6 +1,4 @@
-import { CAC, cac, Command as CacCommand } from 'cac';
 import { Message } from 'wechaty';
-import parse from 'yargs-parser';
 
 export interface ICommandOptions {
   command?: string;
@@ -16,13 +14,7 @@ export class Command {
     return [...fixedRawString.split(' ').filter(Boolean)];
   }
 
-  private cac: CAC;
   private registeredCommand: Map<string, ICommandOptions> = new Map();
-
-  constructor() {
-    this.cac = cac();
-    this.cac.help();
-  }
 
   // eslint-disable-next-line max-params
   register(
@@ -62,15 +54,5 @@ export class Command {
 
   isCommandRegistered(name: string) {
     return this.registeredCommand.has(name);
-  }
-
-  help() {
-    return this.cac.outputHelp();
-  }
-
-  list() {
-    this.cac.commands.forEach((command) => {
-      console.log(command.name, command.args.map((o) => '[' + o.value + ']').join(' '), command.examples[0]);
-    });
   }
 }

@@ -4,7 +4,7 @@ export class Command {
   static parseCommandString(rawString: string) {
     // 不是很懂这里为什么会出现一个隐藏字符
     const fixedRawString = rawString.replace(/ /g, '');
-    return [...fixedRawString.split(' ').filter(Boolean)];
+    return ['node', ...fixedRawString.split(' ').filter(Boolean)];
   }
 
   private cac: CAC;

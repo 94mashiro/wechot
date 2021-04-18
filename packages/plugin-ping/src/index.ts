@@ -5,13 +5,6 @@ const WechotPluginPing: IPlugin = {
 
   apply(context: Context) {
     const { command } = context;
-    command
-      .register('ping [operator] [value]', 'receive pong')
-      ?.option('--out <dir>', 'out dir')
-      .example('ping add hello\nping remove hello\nping vote hello')
-      .action(() => 'pong');
-
-    command.list();
   },
 };
 

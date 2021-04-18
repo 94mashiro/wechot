@@ -34,7 +34,7 @@ export class Session {
       const rawCommand = message.text().split(`@${botName}`)?.[1]?.split('<br/>')?.[0];
       if (rawCommand) {
         const commandArgs = Command.parseCommandString(rawCommand);
-        const replyMessage: string = await this.context.command.parse(commandArgs);
+        const replyMessage: string | undefined | null = await this.context.command.parse(commandArgs, message);
         if (replyMessage) {
           const isMultipleLine = replyMessage.match('\n');
           const mentionHideChar = ' ';

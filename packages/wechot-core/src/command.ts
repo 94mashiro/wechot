@@ -1,36 +1,62 @@
 import { CAC, cac, Command as CacCommand } from 'cac';
+import { Message } from 'wechaty';
+import parse from 'yargs-parser';
+
+export interface ICommandOptions {
+  command?: string;
+  example?: string;
+  description?: string;
+  action: (message: Message, ...args: any[]) => Promise<string | null>;
+}
 
 export class Command {
   static parseCommandString(rawString: string) {
     // 不是很懂这里为什么会出现一个隐藏字符
     const fixedRawString = rawString.replace(/ /g, '');
-    return ['node', ...fixedRawString.split(' ').filter(Boolean)];
+    return [...fixedRawString.split(' ').filter(Boolean)];
   }
 
   private cac: CAC;
-  private registeredCommand: Map<string, CacCommand> = new Map();
+  private registeredCommand: Map<string, ICommandOptions> = new Map();
 
   constructor() {
     this.cac = cac();
     this.cac.help();
   }
 
-  register(name: string, description: string): CacCommand | null {
+  // eslint-disable-next-line max-params
+  register(
+    command: string,
+    action: (message: Message, ...args: any[]) => Promise<string | null>,
+    description?: string,
+    example?: string,
+  ): this | null {
+    const name = command.split(' ')[0];
     if (this.registeredCommand.has(name)) {
       console.warn('duplicate command detected, skip it');
-      return null;
+      return this;
     }
-    const command = this.cac.command(name, description);
-    this.registeredCommand.set(name, command);
-    return command;
+    this.registeredCommand.set(name, {
+      command,
+      description,
+      example,
+      action,
+    });
+    return this;
   }
 
-  async parse(argv: string[]) {
+  async parse(argv: string[], message: Message) {
     try {
-      this.cac.parse(argv, { run: false });
-      return await this.cac.runMatchedCommand();
+      const [name, ...rest] = argv;
+      const command = this.registeredCommand.get(name);
+      if (!command) {
+        return;
+      }
+      const retMessage = await command.action(message, ...rest);
+      return retMessage;
     } catch (e) {
       console.error(e);
+      return;
     }
   }
 

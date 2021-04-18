@@ -39,8 +39,12 @@ const WechotPluginMessagePlugin: IPlugin = {
       });
       await modelInstance.save();
     };
-    events.on('message', handleReceiveMessage);
-    ctx.command.register('top', '发言排行榜')?.action(async () => {
+    const handleSearchTopList = async (message: Message, limit = '10') => {
+      // eslint-disable-next-line no-param-reassign
+      const roomTopic = await message.room()?.topic();
+      if (!roomTopic || !recordRoomTopics.includes(roomTopic)) {
+        return null;
+      }
       const startAt = new Date();
       startAt.setHours(0, 0, 0, 0);
       const endAt = new Date();
@@ -51,6 +55,7 @@ const WechotPluginMessagePlugin: IPlugin = {
             $gte: startAt,
             $lte: endAt,
           },
+          groupTopic: roomTopic,
         })
         .exec();
       let outputTupleSet: [string, number][] = [];
@@ -62,13 +67,15 @@ const WechotPluginMessagePlugin: IPlugin = {
           targetTuple[1] += 1;
         }
       });
-      outputTupleSet = outputTupleSet.sort((a, b) => b[1] - a[1]);
+      outputTupleSet = outputTupleSet.sort((a, b) => b[1] - a[1]).slice(0, Number(limit));
       let outputMessage = `${startAt.getMonth() + 1}月${startAt.getDate()}日发言排行榜：\n`;
       outputTupleSet.forEach((tuple, idx) => {
         outputMessage += `${tuple[0]}：${tuple[1]} ${idx === 0 ? '👑' : ''}\n`;
       });
       return outputMessage;
-    });
+    };
+    events.on('message', handleReceiveMessage);
+    ctx.command.register('top', handleSearchTopList, '发言排行榜');
   },
 };
 

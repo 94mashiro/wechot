@@ -63,9 +63,9 @@ const WechotPluginMessagePlugin: IPlugin = {
         }
       });
       outputTupleSet = outputTupleSet.sort((a, b) => b[1] - a[1]);
-      let outputMessage = '发言排行榜：\n';
-      outputTupleSet.forEach((tuple) => {
-        outputMessage += `${tuple[0]}：${tuple[1]}\n`;
+      let outputMessage = `${startAt.getMonth() + 1}月${startAt.getDate()}日发言排行榜：\n`;
+      outputTupleSet.forEach((tuple, idx) => {
+        outputMessage += `${tuple[0]}：${tuple[1]} ${idx === 0 ? '👑' : ''}\n`;
       });
       return outputMessage;
     });

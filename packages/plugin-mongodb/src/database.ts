@@ -15,10 +15,7 @@ export class MongoDatabase {
   async start() {
     this.client = await mongoose.connect(this.config.uri, { useNewUrlParser: true, useUnifiedTopology: true });
     this.connection = this.client.connection;
-    const schema = new this.client.Schema({ size: 'string' });
-    const Tank = this.client.model('Tank', schema);
   }
-
   async stop() {
     this.connection?.close();
   }

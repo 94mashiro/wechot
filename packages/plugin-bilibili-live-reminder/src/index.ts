@@ -43,7 +43,8 @@ const WechotPluginBilibiliLiveReminder: IPlugin = {
                 targetRoom.say(`关注的主播「${name}」开播了！\n直播标题：${title}\n直播链接：${url}`);
               }),
             );
-          } else if (currentLiveStatus !== 1 && liveStatus === 1) {
+          }
+          if (currentLiveStatus !== liveStatus) {
             await bilibiliLiveReminderModel.model
               .findOneAndUpdate({ mid: Number(mid) }, { liveStatus: currentLiveStatus })
               .exec();

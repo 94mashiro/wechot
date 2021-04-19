@@ -1,4 +1,4 @@
-import { Model, Mongoose, Schema } from 'mongoose';
+import { Model, Mongoose } from 'mongoose';
 
 export class MessageHistoryModel {
   public model: Model<any>;

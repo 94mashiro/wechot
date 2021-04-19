@@ -1,0 +1,27 @@
+{
+  "name": "@wechot/plugin-bilibili-live-reminder",
+  "version": "0.0.12",
+  "description": "",
+  "keywords": [],
+  "author": "mashirow <hyperoot@gmail.com>",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "rimraf lib",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@wechot/core": "^0.0.12",
+    "@wechot/plugin-mongodb": "^0.0.12",
+    "@wechot/utils": "^0.0.12"
+  }
+}

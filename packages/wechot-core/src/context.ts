@@ -31,4 +31,8 @@ export class Context {
   set database(instance: any) {
     this._database = instance;
   }
+
+  get schedule() {
+    return this.app.schedule;
+  }
 }

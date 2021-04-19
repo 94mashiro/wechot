@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "build": "yarn workspace @wechot/utils build && yarn workspace @wechot/core build && yarn workspace @wechot/cli build && yarn workspace @wechot/plugin-forward-telegram build && yarn workspace @wechot/plugin-ping build && yarn workspace @wechot/plugin-mongodb build && yarn workspace @wechot/plugin-message build && yarn workspace @wechot/plugin-coin build"
+    "build": "yarn workspace @wechot/utils build && yarn workspace @wechot/core build && yarn workspace @wechot/cli build && yarn workspace @wechot/plugin-forward-telegram build && yarn workspace @wechot/plugin-ping build && yarn workspace @wechot/plugin-mongodb build && yarn workspace @wechot/plugin-message build && yarn workspace @wechot/plugin-coin build && yarn workspace @wechot/plugin-bilibili-live-reminder build"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",

@@ -1,5 +1,6 @@
 import { requireConfigFile } from '@wechot/utils';
 import { EventEmitter } from 'events';
+import cron from 'node-cron';
 import TypedEventEmitter from 'typed-emitter';
 
 import { Command } from './command';
@@ -50,5 +51,9 @@ export class App {
       console.log('login success');
       await injectPlugins(context, config.plugins);
     });
+  }
+
+  get schedule() {
+    return cron.schedule;
   }
 }

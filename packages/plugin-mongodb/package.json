@@ -1,6 +1,6 @@
 {
   "name": "@wechot/plugin-mongodb",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "",
   "keywords": [],
   "author": "mashirow <hyperoot@gmail.com>",
@@ -20,7 +20,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@wechot/core": "^0.0.10",
+    "@wechot/core": "^0.0.11",
     "mongoose": "^5.12.4"
   }
 }

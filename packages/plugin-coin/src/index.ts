@@ -21,7 +21,7 @@ const WechotPluginCoin: IPlugin = {
         if (!result?.price) {
           return null;
         }
-        return `查询币种：${symbol.toUpperCase()}\n当前价格：${result.price.toFixed(2)}`;
+        return `查询币种：${symbol.toUpperCase()}\n当前价格：${Number(result.price).toFixed(2)}`;
       } catch {
         return null;
       }

@@ -1,5 +1,5 @@
 {
-  "name": "@wechot/utils",
+  "name": "@wechot/plugin-coin",
   "version": "0.0.10",
   "description": "",
   "keywords": [],
@@ -20,7 +20,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "chalk": "^4.1.0",
-    "got": "^11.8.2"
+    "@wechot/core": "^0.0.10",
+    "@wechot/utils": "^0.0.10"
   }
 }

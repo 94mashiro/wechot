@@ -18,11 +18,11 @@ const WechotPluginCoin: IPlugin = {
             },
           })
           .json<any>();
-        if (!result?.price) {
+        if (!result?.lastPrice) {
           return null;
         }
-        const decimalLength = Math.max(2, 6 - result.price.toFixed(0).length);
-        return `查询币种：${symbol.toUpperCase()}\n当前价格：$${Number(result.price).toFixed(
+        const decimalLength = Math.max(2, 6 - result.lastPrice.toFixed(0).length);
+        return `查询币种：${symbol.toUpperCase().replace('USDT', '')}\n当前价格：$${Number(result.lastPrice).toFixed(
           decimalLength,
         )}\n24H涨幅：${Number(result.priceChangePercent).toFixed(2)}%\n`;
       } catch {

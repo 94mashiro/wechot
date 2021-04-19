@@ -11,6 +11,10 @@ export class BilibiliLiveReminderModel {
         index: true,
       },
       name: String,
+      liveStatus: {
+        type: Number,
+        default: 0,
+      },
       createAt: { type: Date, default: Date.now },
     });
     this.model = database.model('bilibili_live_reminders', schema);

@@ -16,7 +16,7 @@ const WechotPluginBilibiliLiveReminder: IPlugin = {
       }
       await Promise.all(
         reminders.map(async (data) => {
-          const { mid, groupTopic }: { mid: number; groupTopic: string[] } = data;
+          const { mid, groupTopic, liveStatus }: { mid: number; groupTopic: string[]; liveStatus: number } = data;
           const upInfo = await got
             .get(`https://api.bilibili.com/x/space/acc/info`, {
               searchParams: {
@@ -28,10 +28,10 @@ const WechotPluginBilibiliLiveReminder: IPlugin = {
           const {
             data: {
               name,
-              live_room: { liveStatus, url, title },
+              live_room: { liveStatus: currentLiveStatus, url, title },
             },
           } = upInfo;
-          if (liveStatus === 1) {
+          if (currentLiveStatus === 1 && liveStatus !== 1) {
             await Promise.all(
               groupTopic.map(async (topic) => {
                 const targetRoom = await context.session.session?.Room.find({
@@ -43,6 +43,10 @@ const WechotPluginBilibiliLiveReminder: IPlugin = {
                 targetRoom.say(`关注的主播「${name}」开播了！\n直播标题：${title}\n直播链接：${url}`);
               }),
             );
+          } else if (currentLiveStatus !== 1 && liveStatus === 1) {
+            await bilibiliLiveReminderModel.model
+              .findOneAndUpdate({ mid: Number(mid) }, { liveStatus: currentLiveStatus })
+              .exec();
           }
         }),
       );

@@ -12,7 +12,7 @@ const WechotPluginCoin: IPlugin = {
       const searchSymbol = `${symbol.toUpperCase()}USDT`;
       try {
         const result = await got
-          .get('https://api1.binance.com/api/v3/ticker/price', {
+          .get('https://api1.binance.com/api/v3/ticker/24hr', {
             searchParams: {
               symbol: searchSymbol,
             },
@@ -21,7 +21,10 @@ const WechotPluginCoin: IPlugin = {
         if (!result?.price) {
           return null;
         }
-        return `查询币种：${symbol.toUpperCase()}\n当前价格：${Number(result.price).toFixed(2)}`;
+        const decimalLength = Math.max(2, 6 - result.price.toFixed(0).length);
+        return `查询币种：${symbol.toUpperCase()}\n当前价格：$${Number(result.price).toFixed(
+          decimalLength,
+        )}\n24H涨幅：${Number(result.priceChangePercent).toFixed(2)}%\n`;
       } catch {
         return null;
       }

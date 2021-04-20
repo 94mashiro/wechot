@@ -92,7 +92,7 @@ export class Telegram extends EventEmitter {
       this.precheck(ctx);
       const message = ctx.message as Message.PhotoMessage;
       const [_thumb, { file_id: sourceFileId }] = message.photo;
-      const photoLink = await ctx.telegram.getFileLink(sourceFileId);
+      const photoLink = (await ctx.telegram.getFileLink(sourceFileId)).toString();
       super.emit('message', {
         type: SupportMessageTypes.Photo,
         chatId: message.chat.id,

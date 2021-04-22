@@ -1,0 +1,25 @@
+{
+  "name": "@wechot/plugin-coin",
+  "version": "0.1.7",
+  "description": "",
+  "keywords": [],
+  "author": "mashirow <hyperoot@gmail.com>",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "rimraf lib",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@wechot/core": "^0.1.0"
+  }
+}

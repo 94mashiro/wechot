@@ -1,10 +1,16 @@
 import { Context, IPlugin } from '@wechot/core';
 import { FileBox } from 'wechaty';
 
+interface IPluginOption {
+  roomTopics: string[];
+  cronSchedule: string;
+}
+
 const WechotPluginDrinkWater: IPlugin = {
   priority: 100,
-  apply(ctx: Context, roomTopics: string[]) {
+  apply(ctx: Context, option: IPluginOption) {
     const { schedule, session } = ctx;
+    const { roomTopics, cronSchedule } = option;
     const handleRemindDrinkWater = () => {
       roomTopics.forEach(async (topic) => {
         const targetRoom = await session.session?.Room.find({
@@ -18,7 +24,7 @@ const WechotPluginDrinkWater: IPlugin = {
         );
       });
     };
-    schedule('30 8-20/2 * * *', handleRemindDrinkWater.bind(this));
+    schedule(cronSchedule, handleRemindDrinkWater.bind(this));
   },
 };
 
